@@ -7,3 +7,11 @@ class Perro(Animal):
 
     def bark(self):
         print(self.nombre + " esta ladrando...")
+    
+
+    def sleep(self):
+        print(self.nombre + " es un perro que esta duermiendo.. zzz")
+
+    
+    def make_sound(self):
+        print(self.nombre + " hace un guauu...")

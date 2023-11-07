@@ -13,12 +13,26 @@ public class Animal{
         this.peso = peso;
     }
 
+    //Ejemplo parametrico
+    public Animal(){
+        this.nombre = null;
+        this.especie = null;
+        this.raza = null;
+        this.peso = -1;
+        this.edad = -1;
+    }
+
     public void move(){
         System.out.println(this.nombre + " se esta moviendo...");
     }
 
     public void eat(){
         System.out.println(this.nombre + " esta comiendo...");
+    }
+
+    //Metodo con polimorfismo parametrico
+    public void eat(String food){
+        System.out.println(this.nombre + " esta comiendo " + food);
     }
 
 

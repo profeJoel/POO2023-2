@@ -7,4 +7,11 @@ class Gato(Animal):
 
     def purr(self):
         print(self.nombre + " esta ronrroneando...")
+
+    def sleep(self):
+        print(self.nombre + " es un gato que esta duermiendo.. zzz")
+
+    
+    def make_sound(self):
+        print(self.nombre + " hace un miauu...")
     

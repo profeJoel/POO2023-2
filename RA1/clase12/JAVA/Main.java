@@ -37,6 +37,27 @@ public class Main{
         for(Animal a : lista){
             System.out.println("El animal " + a.nombre + " es " + a.especie);
             a.makeSound();
+            //a.sleep();
+        }
+
+        //Polimorfismo
+        garfield.sleep();
+        clifford.sleep();
+        sonic.sleep();
+        //a1.sleep(); -> no se puede realizar porque no tiene el metodo implementado
+
+        a1.eat("comida");
+        garfield.eat("lazanna");
+        clifford.eat("vacas");
+        sonic.eat("gemas");
+
+        //Creacion de objeto Animal null
+        Animal animalNull = new Animal();
+        animalNull.move();
+        
+        // Probando generalizacion con parametrico
+        for(Animal a : lista){
+            a.eat("pelet");
         }
     }
 }

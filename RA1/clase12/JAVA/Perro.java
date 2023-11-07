@@ -9,4 +9,14 @@ public class Perro extends Animal{
     public void bark(){
         System.out.println(this.nombre + " esta ladrando...");
     }
+
+    //Metodo por sobrecarga
+    public void sleep(){
+        System.out.println(this.nombre + " es un perro que duerme... zzz ");
+    }
+
+    @Override
+    public void makeSound(){
+        System.out.println(this.nombre + " hace guauu...");
+    }
 }

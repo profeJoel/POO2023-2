@@ -12,5 +12,11 @@ class Animal:
     def eat(self):
         print(self.nombre + " se esta comiendo...")
 
+    def eat(self, food=None):
+        if food is None:
+            print(self.nombre + " se esta comiendo...")
+        else:
+            print(self.nombre + " se esta comiendo " + food)
+
     def make_sound(self):
         print(self.nombre + " hace un sonido...")

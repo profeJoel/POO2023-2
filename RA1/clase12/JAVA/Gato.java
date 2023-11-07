@@ -10,4 +10,14 @@ public class Gato extends Animal{
         System.out.println(this.nombre + " esta ronrroneando...");
     }
 
+    //Metodo por sobrecarga
+    public void sleep(){
+        System.out.println(this.nombre + " es un gato que duerme... zzz ");
+    }
+
+    @Override
+    public void makeSound(){
+        System.out.println(this.nombre + " hace miauu...");
+    }
+
 }
