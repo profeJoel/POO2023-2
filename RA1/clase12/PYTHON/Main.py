@@ -24,7 +24,7 @@ if __name__ == "__main__":
     """
 
     lista = []
-    lista = [None]*3
+    lista = [None]*3 #Inicializacion de un arreglo vacio en python de 3 posiciones
     lista[0] = garfield
     lista[1] = clifford
     lista[2] = Sonic
