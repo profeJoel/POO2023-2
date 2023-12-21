@@ -1,6 +1,8 @@
 package com.anime;
 
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +24,7 @@ import com.anime.model.Personaje;
 public class App extends Application {
 
     private static Scene scene;
+    
 
     @Override
     public void start(Stage ventana) throws IOException {
@@ -29,6 +32,8 @@ public class App extends Application {
         PersonajeController controlador = new PersonajeController(); // el que maneja la informacion
         //Agregar informacion de Personaje
         controlador.addPersonaje(new Personaje(0, "Naruto", 15, "Naruto Shippuden"));
+        controlador.addPersonaje(new Personaje(1, "Pikachu", 2, "Pokemon"));
+        controlador.addPersonaje(new Personaje(2, "Piccolo", 100, "Dragon Ball"));
 
         ventana.setTitle("Proyecto Anime");
         VBox panelGeneral = new VBox();
@@ -37,15 +42,24 @@ public class App extends Application {
         TableView lista = new TableView();
         lista.setEditable(true);
 
-        TableColumn personajeID = new TableColumn("ID");
-        personajeID.setCellValueFactory(new PropertyValueFactory<Personaje, int>("ID"));
-        TableColumn personajeNombre = new TableColumn("Nombre");
-        personajeNombre.setCellValueFactory(new PropertyValueFactory<Personaje,String>("nombre"));
-        TableColumn personajeEdad = new TableColumn("Edad");
-        personajeEdad.setCellValueFactory(new PropertyValueFactory<Personaje, int>("edad"));
-        TableColumn personajeAnime = new TableColumn("Anime");
-        personajeAnime.setCellValueFactory(new PropertyValueFactory<Personaje, String>("anime"));
+        TableColumn<Personaje, String> personajeID = new TableColumn("ID");
+        TableColumn<Personaje, String> personajeNombre = new TableColumn("Nombre");
+        TableColumn<Personaje, String> personajeEdad = new TableColumn("Edad");
+        TableColumn<Personaje, String> personajeAnime = new TableColumn("Anime");  
+
+        // personajeID.setCellValueFactory(new PropertyValueFactory<Personaje, String>("id"));
+        // personajeNombre.setCellValueFactory(new PropertyValueFactory<Personaje, String>("nombre"));
+        // personajeEdad.setCellValueFactory(new PropertyValueFactory<Personaje, String>("edad"));
+        // personajeAnime.setCellValueFactory(new PropertyValueFactory<Personaje, String>("anime"));
+
+        personajeID.setCellValueFactory(c -> { for(int i =0; i< controlador.getPersonajes().size(); i++) new SimpleStringProperty(new String(controlador.getPersonajes().get(i).getId()))});
+        personajeNombre.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getNombre())));
+        personajeEdad.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getEdad())));
+        personajeAnime.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getAnime())));
+        // for(Personaje p : controlador.getPersonajes())
+        //     lista.getItems().add(p);
         lista.setItems(controlador.getPersonajes());
+
         lista.getColumns().addAll(personajeID, personajeNombre, personajeEdad, personajeAnime);
 
         HBox panelBotones = new HBox();

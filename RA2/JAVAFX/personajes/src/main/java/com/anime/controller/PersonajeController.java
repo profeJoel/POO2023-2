@@ -1,6 +1,8 @@
 package com.anime.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import com.anime.model.Personaje;
 
@@ -18,8 +20,12 @@ public class PersonajeController {
         ObservableList<Personaje> lista = FXCollections.observableArrayList(this.personajes);
         return lista;
     }
-
+    
     public void addPersonaje(Personaje p){
         this.personajes.add(p);
+        //System.out.println("> personaje: " + this.personajes.get(this.personajes.lastIndexOf(p)));
+
+        for(Personaje x : this.personajes)
+            System.out.println(x.getNombre());
     }
 }
