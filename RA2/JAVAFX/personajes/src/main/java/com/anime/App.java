@@ -41,26 +41,39 @@ public class App extends Application {
         Label textoSuperior = new Label("Lista de Personajes de Anime");
         TableView lista = new TableView();
         lista.setEditable(true);
-
+/* 
         TableColumn<Personaje, String> personajeID = new TableColumn("ID");
         TableColumn<Personaje, String> personajeNombre = new TableColumn("Nombre");
         TableColumn<Personaje, String> personajeEdad = new TableColumn("Edad");
-        TableColumn<Personaje, String> personajeAnime = new TableColumn("Anime");  
+        TableColumn<Personaje, String> personajeAnime = new TableColumn("Anime");  */ 
+        
+        TableColumn<Personaje, String> personajeID = new TableColumn<>("ID");
+        TableColumn<Personaje, String> personajeNombre = new TableColumn<>("Nombre");
+        TableColumn<Personaje, String> personajeEdad = new TableColumn<>("Edad");
+        TableColumn<Personaje, String> personajeAnime = new TableColumn<>("Anime"); 
 
         // personajeID.setCellValueFactory(new PropertyValueFactory<Personaje, String>("id"));
         // personajeNombre.setCellValueFactory(new PropertyValueFactory<Personaje, String>("nombre"));
         // personajeEdad.setCellValueFactory(new PropertyValueFactory<Personaje, String>("edad"));
         // personajeAnime.setCellValueFactory(new PropertyValueFactory<Personaje, String>("anime"));
 
-        personajeID.setCellValueFactory(c -> { for(int i =0; i< controlador.getPersonajes().size(); i++) new SimpleStringProperty(new String(controlador.getPersonajes().get(i).getId()))});
+        /* personajeID.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getId())));
         personajeNombre.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getNombre())));
         personajeEdad.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getEdad())));
-        personajeAnime.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getAnime())));
-        // for(Personaje p : controlador.getPersonajes())
-        //     lista.getItems().add(p);
-        lista.setItems(controlador.getPersonajes());
+        personajeAnime.setCellValueFactory(c -> new SimpleStringProperty(new String(controlador.getPersonajes().listIterator().next().getAnime()))); */
 
+        personajeID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        personajeNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        personajeEdad.setCellValueFactory(new PropertyValueFactory<>("edad"));
+        personajeAnime.setCellValueFactory(new PropertyValueFactory<>("anime"));
+
+            
         lista.getColumns().addAll(personajeID, personajeNombre, personajeEdad, personajeAnime);
+        lista.setItems(controlador.getPersonajes());
+        
+        // for(Personaje p : controlador.getPersonajes())
+        //     lista.getItems().add(p); 
+        
 
         HBox panelBotones = new HBox();
         Button botonAgregar = new Button("Agregar Personaje");

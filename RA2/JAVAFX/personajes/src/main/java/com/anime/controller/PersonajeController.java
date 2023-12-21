@@ -1,8 +1,6 @@
 package com.anime.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import com.anime.model.Personaje;
 
