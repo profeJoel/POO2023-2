@@ -25,16 +25,17 @@ import com.anime.model.Personaje;
 public class App extends Application {
 
     private static Scene scene;
+    private static PersonajeController controlador;
     
 
     @Override
     public void start(Stage ventana) throws IOException {
 
-        PersonajeController controlador = new PersonajeController(); // el que maneja la informacion
+         
         //Agregar informacion de Personaje
-        controlador.addPersonaje(new Personaje(0, "Naruto", 15, "Naruto Shippuden"));
-        controlador.addPersonaje(new Personaje(1, "Pikachu", 2, "Pokemon"));
-        controlador.addPersonaje(new Personaje(2, "Piccolo", 100, "Dragon Ball"));
+        // controlador.addPersonaje(new Personaje(0, "Naruto", 15, "Naruto Shippuden"));
+        // controlador.addPersonaje(new Personaje(1, "Pikachu", 2, "Pokemon"));
+        // controlador.addPersonaje(new Personaje(2, "Piccolo", 100, "Dragon Ball"));
 
         ventana.setTitle("Proyecto Anime");
         VBox panelGeneral = new VBox();
@@ -84,7 +85,12 @@ public class App extends Application {
 
         HBox panelBotones = new HBox();
         Button botonAgregar = new Button("Agregar Personaje");
-        botonAgregar.setOnAction( e -> AgregarPersonaje.vista());
+        botonAgregar.setOnAction( e -> {
+            ventana.hide(); // Opcion de ocultar ventana mientras la otra está trabajando
+            controlador.addPersonaje(AgregarPersonaje.vista(controlador));
+            ventana.show(); // Opcion de visualizar ventana nuevamente (no se crea otra ventana)
+            lista.getItems().add(controlador.getPersonajes().get(controlador.getPersonajes().size()-1));
+        });
         Button botonSalir = new Button("Salir");
         botonSalir.setOnAction( e -> ventana.close());
         panelBotones.getChildren().addAll(botonAgregar, botonSalir);
@@ -99,6 +105,7 @@ public class App extends Application {
 
 
     public static void main(String[] args) {
+        controlador = new PersonajeController(); // el que maneja la informacion
         launch();
     }
 

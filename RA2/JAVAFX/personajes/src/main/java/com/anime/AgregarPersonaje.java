@@ -1,10 +1,14 @@
 package com.anime;
 
+import com.anime.controller.PersonajeController;
+import com.anime.model.Personaje;
+
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -12,8 +16,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class AgregarPersonaje {
-    public static String vista(){
-        String personaje = "";
+    private static Personaje nuevo = null;
+    public static Personaje vista(PersonajeController controlador){
         Stage ventana = new Stage();
         ventana.setTitle("Agregar Personaje de Anime");
         ventana.initModality(Modality.APPLICATION_MODAL);
@@ -31,9 +35,13 @@ public class AgregarPersonaje {
         Label textoEdad = new Label("Edad:");
         Label textoAnime = new Label("Anime:");
 
-        Spinner campoID = new Spinner();
+        Spinner<Integer> campoID = new Spinner();
+        campoID.setEditable(true);
+        campoID.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(controlador.getPersonajes().size(), 10000000));
         TextField campoNombre = new TextField();
-        Spinner campoEdad = new Spinner();
+        Spinner<Integer> campoEdad = new Spinner();
+        campoEdad.setEditable(true);
+        campoEdad.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 10000));
         TextField campoAnime = new TextField();
 
         Button botonAgregar = new Button("Agregar");
@@ -56,13 +64,21 @@ public class AgregarPersonaje {
 
         formulario.getChildren().addAll(textoID, campoID, textoNombre, campoNombre, textoEdad, campoEdad, textoAnime, campoAnime, botonAgregar, botonCancelar);
 
+        botonCancelar.setOnAction( e -> ventana.close());
+        botonAgregar.setOnAction( e -> {
+            if(campoNombre.getText().length() > 0 && campoAnime.getText().length() > 0){
+                nuevo = new Personaje(campoID.getValue(), campoNombre.getText(), campoEdad.getValue(), campoAnime.getText());
+            }
+            ventana.close();
+        });
+
         panelGeneral.getChildren().addAll(texto, formulario);
 
         Scene Escena = new Scene(panelGeneral);
         ventana.setScene(Escena);
-        ventana.show();
+        ventana.showAndWait();
 
-        return personaje; 
+        return nuevo; 
     }
 
 }
