@@ -48,4 +48,8 @@ public class Personaje {
     public Personaje getAll(){
         return this; //retornar toda la informacion
     }
+    
+    public String toString(){
+        return this.id + " " + this.nombre + " " + this.edad + " " + this.anime; 
+    }
 }
